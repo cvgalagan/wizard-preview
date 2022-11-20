@@ -1,0 +1,16 @@
+$font-size: 1rem;
+$container-width: 350px;
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  font-size: $font-size;
+  width: $container-width;
+  &__item {
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+      margin-top: 10px;
+    }
+  }
+}

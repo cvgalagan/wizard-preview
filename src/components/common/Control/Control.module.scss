@@ -1,0 +1,16 @@
+@use "../../../styles/common";
+
+.control {
+  display: flex;
+  flex-direction: column;
+  &__label {
+    text-align: left;
+    margin-bottom: 5px;
+  }
+  &__feedback {
+    margin-top: 2px;
+    height: 1rem;
+    font-size: .875rem;
+    color: common.$danger-color;
+  }
+}
