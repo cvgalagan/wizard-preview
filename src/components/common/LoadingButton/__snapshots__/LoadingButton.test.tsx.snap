@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingButton should render in loading state 1`] = `
+<Button
+  active={false}
+  className="loadingButton loadingButton_isLoading"
+  disabled={true}
+  variant="primary"
+>
+  <div
+    className="loadingButton__content"
+  >
+    Test button
+  </div>
+  <div
+    className="loadingButton__spinnerContainer"
+  >
+    <ForwardRef
+      className="loadingButton__spinner"
+    />
+  </div>
+</Button>
+`;

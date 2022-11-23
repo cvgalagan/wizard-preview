@@ -3,9 +3,9 @@ import * as yup from "yup"
 import { CredentialsSignInForm } from "../../../types/CredentialsSignInForm"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import Input from "../../common/Input/Input"
 import styles from "./LoginForm.module.scss"
 import Control from "../../common/Control/Control"
+import LoadingButton from "../../common/LoadingButton/LoadingButton"
 
 const schema = yup.object().shape({
     email: yup.string().email("Invalid email").required("Email is required"),
@@ -49,7 +49,9 @@ const LoginForm: React.FC<LoginFormProps> = props => {
                 className={styles.loginForm__item}
                 feedback={errors.password?.message}
             />
-            <Input type="submit" className={styles.loginForm__item} />
+            <LoadingButton type="submit" className={styles.loginForm__item}>
+                Submit
+            </LoadingButton>
         </form>
     )
 }

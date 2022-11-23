@@ -2,20 +2,21 @@
 @use "sass:color";
 
 $border-color: #cacaca;
-$border-focus-color: #2d9df3;
+$border-focus-color: common.$primary-color;
 $border-invalid-color: common.$danger-color;
 $border-disabled-color: #c3c3c3;
 $disabled-color: #dadada;
 $disabled-text-color: #727272;
 
 .input {
-  border-radius: 5px;
+  border-radius: common.$border-radius;
   padding: 5px 10px;
   background-color: common.$default-background-color;
   border: 1px solid $border-color;
   transition: border, background-color .3s ease-in-out;
   cursor: text;
   font-size: inherit;
+  color: common.$text-color;
   &:focus {
     border-color: $border-focus-color;
     outline: 0;
@@ -24,7 +25,7 @@ $disabled-text-color: #727272;
     border-color: $border-invalid-color;
     color: $border-invalid-color;
     &:focus {
-      border-color: color.adjust($border-invalid-color, $lightness: -10);
+      border-color: color.adjust($border-invalid-color, $lightness: -10%);
     }
   }
   &:disabled {
@@ -39,7 +40,7 @@ $disabled-text-color: #727272;
   &[type="button"], &[type="submit"], &[type="reset"] {
     cursor: pointer;
     &:hover {
-      background-color: color.adjust(common.$default-background-color, $lightness: -5);
+      background-color: color.adjust(common.$default-background-color, $lightness: -5%);
     }
   }
 }

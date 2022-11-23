@@ -1,0 +1,71 @@
+@use "../../../styles/common";
+@use "sass:color";
+
+$hover-color: color.adjust(common.$primary-color, $lightness: -10%);
+$disabled-color: color.adjust(common.$primary-color, $lightness: 20%);
+
+.button {
+  padding: 10px;
+  border: 1px solid common.$primary-color;
+  border-radius: common.$border-radius;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+  $self: &;
+  &:disabled {
+    cursor: default;
+  }
+  &_primary {
+    color: white;
+    background-color: common.$primary-color;
+    &:hover {
+      background-color: $hover-color;
+    }
+    &:disabled {
+      background-color: $disabled-color;
+      &:hover {
+        background-color: $disabled-color;
+      }
+    }
+  }
+  &_outlinePrimary {
+    color: common.$primary-color;
+    background-color: white;
+    &:hover {
+      background-color: common.$primary-color;
+    }
+    &:disabled {
+      border-color: $disabled-color;
+      &:hover {
+        background-color: white;
+      }
+    }
+  }
+  &_light {
+    border-color: common.$light-color;
+    background-color: white;
+    color: common.$text-color;
+    &:hover {
+      background-color: common.$light-color;
+    }
+    &:disabled {
+      color: color.adjust(common.$text-color, $lightness: 20%);
+      &:hover {
+        background-color: white;
+      }
+    }
+  }
+  &_link {
+    color: common.$primary-color;
+    background-color: white;
+    border: none;
+    &:hover {
+      color: $hover-color;
+    }
+    &:disabled {
+      color: $disabled-color;
+      &:hover {
+        color: $disabled-color;
+      }
+    }
+  }
+}
