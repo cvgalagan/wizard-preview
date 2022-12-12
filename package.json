@@ -2,6 +2,7 @@
   "name": "wizard-preview",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://cvgalagan.github.io/wizard-preview",
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
     "@testing-library/jest-dom": "^5.16.5",
@@ -23,6 +24,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -55,6 +58,7 @@
     "enzyme-to-json": "^3.6.2",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "gh-pages": "^4.0.0",
     "prettier": "^2.7.1"
   }
 }
