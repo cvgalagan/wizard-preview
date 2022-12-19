@@ -1,51 +1,54 @@
 import React from "react"
-import { shallow } from "enzyme"
 import PublicPage from "./PublicPage"
+import { render, screen } from "@testing-library/react"
 
 const testChildren = <div className="test-class">test children</div>
-const testHidingParams = [
-    { name: "hideLogo", element: ".header__left" },
-    { name: "hideLanguageSelector", element: ".header__right" }
-]
 const testText = "test text"
 
 describe("PublicPage", () => {
     it("should render", () => {
-        const wrapper = shallow(<PublicPage>test</PublicPage>)
-        expect(wrapper).toMatchSnapshot()
+        render(<PublicPage testId="public">test</PublicPage>)
+        expect(screen.getByTestId("public")).toBeInTheDocument()
     })
     it("should have content in center", () => {
-        const wrapper = shallow(<PublicPage contentInCenter>test</PublicPage>)
-        expect(wrapper.hasClass("public-page_centered")).toBeTruthy()
+        render(
+            <PublicPage contentInCenter testId="public">
+                test
+            </PublicPage>
+        )
+        expect(screen.getByTestId("public").className.includes("public-page_centered")).toBeTruthy()
     })
     it("should have children in a body", () => {
-        const wrapper = shallow(<PublicPage>{testChildren}</PublicPage>)
-        expect(wrapper.find(".public-page__body").contains(testChildren)).toBeTruthy()
-    })
-    testHidingParams.forEach(p => {
-        const params = { [p.name]: true }
-        it(`should hide ${p.element} element on ${p.name} param`, () => {
-            const wrapper = shallow(<PublicPage {...params}>test</PublicPage>)
-            expect(wrapper.find(p.element).children()).toHaveLength(0)
-        })
+        render(<PublicPage testId="public">{testChildren}</PublicPage>)
+        const element = screen.getByTestId("public")
+        expect(element.getElementsByClassName("test-class")).toHaveLength(1)
     })
 })
 
 describe("PublicPage.Message", () => {
     it("should render", () => {
-        const wrapper = shallow(<PublicPage.Message text={testText}>test</PublicPage.Message>)
-        expect(wrapper).toMatchSnapshot()
-    })
-    it("should show title", () => {
-        const wrapper = shallow(
-            <PublicPage.Message text={testText} title="Test title">
+        render(
+            <PublicPage.Message text={testText} testId="public">
                 test
             </PublicPage.Message>
         )
-        expect(wrapper.exists(".public-page-message__title")).toBeTruthy()
+        expect(screen.getByTestId("public")).toBeInTheDocument()
+    })
+    it("should show title", () => {
+        render(
+            <PublicPage.Message text={testText} title="Test title" testId="public">
+                test
+            </PublicPage.Message>
+        )
+        expect(screen.getByText("Test title")).toBeInTheDocument()
     })
     it("should have children in image container", () => {
-        const wrapper = shallow(<PublicPage.Message text={testText}>{testChildren}</PublicPage.Message>)
-        expect(wrapper.find(".public-page-message__image").contains(testChildren)).toBeTruthy()
+        render(
+            <PublicPage.Message text={testText} testId="public">
+                {testChildren}
+            </PublicPage.Message>
+        )
+        const element = screen.getByTestId("public")
+        expect(element.getElementsByClassName("test-class")).toHaveLength(1)
     })
 })

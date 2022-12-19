@@ -1,10 +1,10 @@
 import React from "react"
-import { shallow } from "enzyme"
 import ErrorMessage from "./ErrorMessage"
+import { render, screen } from "@testing-library/react"
 
 describe("ErrorMessage", () => {
     it("should render", () => {
-        const wrapper = shallow(<ErrorMessage text="test" />)
-        expect(wrapper).toMatchSnapshot()
+        render(<ErrorMessage text="test" />)
+        expect(screen.getByText("test")).toBeInTheDocument()
     })
 })

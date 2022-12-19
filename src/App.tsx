@@ -8,7 +8,7 @@ function App() {
         <ErrorBoundary>
             <div className="App">
                 <header className="App-header">
-                    <LoginForm onSubmit={data => console.log("SUBMIT", data)} />
+                    <LoginForm onSubmit={data => console.log("SUBMIT", data)} testId="login-form" />
                 </header>
             </div>
         </ErrorBoundary>

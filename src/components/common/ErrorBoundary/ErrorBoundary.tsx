@@ -8,6 +8,7 @@ const defaultError = "Error occurred"
 interface Props {
     local?: boolean
     children: React.ReactNode
+    testId?: string
 }
 
 interface State {
@@ -31,9 +32,9 @@ class ErrorBoundary extends React.Component<Props, State> {
     render(): React.ReactNode {
         if (this.state.hasError) {
             if (this.props.local) {
-                return <ErrorMessage text={defaultError} />
+                return <ErrorMessage text={defaultError} testId={this.props.testId} />
             }
-            return <FullscreenError message={defaultError} />
+            return <FullscreenError message={defaultError} testId={this.props.testId} />
         }
         return this.props.children
     }

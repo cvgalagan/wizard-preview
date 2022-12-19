@@ -1,30 +1,30 @@
 import React from "react"
-import { shallow } from "enzyme"
 import Spinner from "./Spinner"
+import { render, screen } from "@testing-library/react"
 
 describe("Spinner", () => {
     it("should render", () => {
-        const wrapper = shallow(<Spinner />)
-        expect(wrapper).toMatchSnapshot()
+        render(<Spinner />)
+        expect(screen.getByRole("progressbar")).toBeInTheDocument()
     })
     it("should add 'indeterminate' modifier by default", () => {
-        const wrapper = shallow(<Spinner />)
-        const element = wrapper.find(".spinner").first()
-        expect(element.hasClass("spinner_indeterminate")).toEqual(true)
+        render(<Spinner />)
+        const element = screen.getByRole("progressbar")
+        expect(element.className.includes("spinner_indeterminate")).toBeTruthy()
     })
     it("should add 'static' modifier if variant is indeterminate", () => {
-        const wrapper = shallow(<Spinner variant="indeterminate" />)
-        const element = wrapper.find(".spinner").first()
-        expect(element.hasClass("spinner_indeterminate")).toEqual(true)
+        render(<Spinner variant="indeterminate" />)
+        const element = screen.getByRole("progressbar")
+        expect(element.className.includes("spinner_indeterminate")).toBeTruthy()
     })
     it("should add 'static' modifier if variant is static", () => {
-        const wrapper = shallow(<Spinner variant="static" />)
-        const element = wrapper.find(".spinner").first()
-        expect(element.hasClass("spinner_static")).toEqual(true)
+        render(<Spinner variant="static" />)
+        const element = screen.getByRole("progressbar")
+        expect(element.className.includes("spinner_static")).toBeTruthy()
     })
     it("should add 'disable-shrink' modifier if disableShrink is true", () => {
-        const wrapper = shallow(<Spinner disableShrink />)
-        const element = wrapper.find(".spinner").first()
-        expect(element.hasClass("spinner_disable-shrink")).toEqual(true)
+        render(<Spinner disableShrink />)
+        const element = screen.getByRole("progressbar")
+        expect(element.className.includes("spinner_disable-shrink")).toBeTruthy()
     })
 })
