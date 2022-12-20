@@ -1,11 +1,8 @@
 import React from "react"
 import FullscreenError from "./FullscreenError"
-import { shallow } from "enzyme"
-import { mockedTranslation } from "../../../utility/tests/mockedObjects"
+import { render, screen } from "@testing-library/react"
 
-jest.mock("react-i18next", () => ({
-    useTranslation: () => mockedTranslation
-}))
+const testId = "fullscreenError"
 
 const props = {
     title: "Test title",
@@ -14,15 +11,15 @@ const props = {
 
 describe("FullscreenError", () => {
     it("should render", () => {
-        const wrapper = shallow(<FullscreenError {...props} />)
-        expect(wrapper).toMatchSnapshot()
-    })
-    it("should render with title and message", () => {
-        const wrapper = shallow(<FullscreenError {...props} />)
-        expect(wrapper.find(".fullscreenError__title").text()).toBe(props.title)
-        expect(wrapper.find(".fullscreenError__message").text()).toBe(props.message)
+        render(<FullscreenError {...props} testId={testId} />)
+        expect(screen.getByTestId(testId)).toBeInTheDocument()
+        expect(screen.getByText(props.title)).toBeInTheDocument()
+        expect(screen.getByText(props.message)).toBeInTheDocument()
     })
     it("should render without title and message", () => {
-        shallow(<FullscreenError />)
+        render(<FullscreenError testId={testId} />)
+        expect(screen.getByTestId(testId)).toBeInTheDocument()
+        expect(screen.queryAllByText(props.title)).toEqual([])
+        expect(screen.queryAllByText(props.message)).toEqual([])
     })
 })

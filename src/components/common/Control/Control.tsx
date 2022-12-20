@@ -8,13 +8,14 @@ export interface ControlProps extends InputProps {
     label: string
     className?: string
     feedback?: string
+    testId?: string
 }
 
 const Control = React.forwardRef<HTMLInputElement, ControlProps>((props, ref) => {
-    const { label, id, className, feedback, ...inputProps } = props
+    const { label, id, className, feedback, testId, ...inputProps } = props
 
     return (
-        <div className={cn(styles.control, className)}>
+        <div className={cn(styles.control, className)} data-testid={testId}>
             <label htmlFor={id} className={styles.control__label}>
                 {label}
             </label>

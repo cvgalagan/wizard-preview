@@ -2,17 +2,16 @@ import React, { ButtonHTMLAttributes } from "react"
 import styles from "./Button.module.scss"
 import cn from "classnames"
 
-type ButtonType = "submit" | "button" | "reset"
 type ButtonVariant = "primary" | "outline-primary" | "light" | "link"
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    type?: ButtonType
     variant?: ButtonVariant
     children?: React.ReactNode
+    testId?: string
 }
 
 const Button: React.FC<ButtonProps> = props => {
-    const { children, variant = "primary", className, ...buttonProps } = props
+    const { children, variant = "primary", className, testId, ...buttonProps } = props
 
     const getVariant = () => {
         switch (variant) {
@@ -28,7 +27,7 @@ const Button: React.FC<ButtonProps> = props => {
     }
 
     return (
-        <button {...buttonProps} className={cn(styles.button, getVariant(), className)}>
+        <button {...buttonProps} className={cn(styles.button, getVariant(), className)} data-testid={testId}>
             {children}
         </button>
     )

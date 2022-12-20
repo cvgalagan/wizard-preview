@@ -14,6 +14,7 @@ const schema = yup.object().shape({
 
 export interface LoginFormProps {
     onSubmit: (data: CredentialsSignInForm) => void
+    testId?: string
 }
 
 const LoginForm: React.FC<LoginFormProps> = props => {
@@ -30,7 +31,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
     }
 
     return (
-        <form className={styles.loginForm} onSubmit={handleSubmit(onSubmitFactory)}>
+        <form className={styles.loginForm} onSubmit={handleSubmit(onSubmitFactory)} data-testid={props.testId}>
             <Control
                 {...register("email")}
                 id="email-input"

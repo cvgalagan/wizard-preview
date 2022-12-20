@@ -6,18 +6,13 @@ import logo from "../../../logo.svg"
 export interface FullscreenErrorProps {
     title?: string
     message?: string
+    testId?: string
 }
 
 const FullscreenError: React.FC<FullscreenErrorProps> = props => {
-    const { title, message } = props
+    const { title, message, testId } = props
     return (
-        <PublicPage
-            hideLanguageSelector={true}
-            hidePrivacyPolicy={true}
-            hideTermOfUse={true}
-            className={styles.fullscreenError}
-            contentInCenter
-        >
+        <PublicPage className={styles.fullscreenError} contentInCenter testId={testId}>
             <div className={styles.fullscreenError__content}>
                 <h1 className={styles.fullscreenError__title}>{title}</h1>
                 {message && <p className={styles.fullscreenError__message}>{message}</p>}

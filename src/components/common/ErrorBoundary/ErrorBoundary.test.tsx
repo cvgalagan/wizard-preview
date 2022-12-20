@@ -1,9 +1,6 @@
 import React from "react"
-import { mount } from "enzyme"
 import ErrorBoundary from "./ErrorBoundary"
-import FullscreenError from "../FullscreenError/FullscreenError"
-import ErrorMessage from "../ErrorMessage/ErrorMessage"
-import { mockedTranslation } from "../../../utility/tests/mockedObjects"
+import { render, screen } from "@testing-library/react"
 
 const errorMessage = "Oops"
 
@@ -15,27 +12,23 @@ const ComponentWithError = () => {
     return <div id="never-shown">{throwError()}</div>
 }
 
-jest.mock("react-i18next", () => ({
-    useTranslation: () => mockedTranslation
-}))
-
 describe("ErrorBoundary", () => {
     it("should show fullscreen error", () => {
-        const wrapper = mount(
-            <ErrorBoundary>
+        render(
+            <ErrorBoundary testId="error">
                 <ComponentWithError />
             </ErrorBoundary>
         )
-        expect(wrapper.find(FullscreenError).exists()).toBeTruthy()
-        expect(wrapper.find(ErrorMessage).exists()).toBeFalsy()
+        expect(screen.getByTestId("error").className.includes("errorMessage")).toBeFalsy()
+        expect(screen.getByTestId("error").className.includes("fullscreenError")).toBeTruthy()
     })
     it("should show local error", () => {
-        const wrapper = mount(
-            <ErrorBoundary local>
+        render(
+            <ErrorBoundary local testId="error">
                 <ComponentWithError />
             </ErrorBoundary>
         )
-        expect(wrapper.find(FullscreenError).exists()).toBeFalsy()
-        expect(wrapper.find(ErrorMessage).exists()).toBeTruthy()
+        expect(screen.getByTestId("error").className.includes("errorMessage")).toBeTruthy()
+        expect(screen.getByTestId("error").className.includes("fullscreenError")).toBeFalsy()
     })
 })
